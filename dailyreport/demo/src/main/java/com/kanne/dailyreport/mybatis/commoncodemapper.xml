@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	
+	
+<mapper namespace="com.kanne.dailyreport.dao.CommonCodeDao">
+	
+	<select id="select" parameterType="int" resultType="CommonCodeVO">
+		SELECT * FROM commoncode WHERE scode=#{scode}
+	</select>
+	<select id="selectComCode" parameterType="int" resultType="CommonCodeVO">
+		SELECT * FROM commoncode WHERE comcode=#{comcode}
+	</select>
+	<select id="selectAll" resultType="CommonCodeVO">
+		SELECT * FROM commoncode WHERE ddate IS NULL
+	</select>
+	<insert id="insert" parameterType="CommonCodeVO">
+		INSERT INTO commoncode VALUES (#{scode},#{comcode},#{name},SYSDATE(),NULL,NULL)
+	</insert>
+	<update id="update" parameterType="CommonCodeVO">
+		UPDATE commoncode 
+		SET NAME = #{name},
+			udate = SYSDATE()
+		WHERE SCODE=#{scode}			
+	</update>
+	<delete id="delete" parameterType="CommonCodeVO">
+		UPDATE commoncode 
+		SET ddate = SYSDATE()
+		WHERE SCODE=#{scode}
+	</delete>	
+
+</mapper>
+
+
+
+
+
+

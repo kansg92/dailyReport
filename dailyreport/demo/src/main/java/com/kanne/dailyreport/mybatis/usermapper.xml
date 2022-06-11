@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	
+	
+<mapper namespace="com.kanne.dailyreport.dao.UserDao">
+	
+	<select id="select" parameterType="String" resultType="UserVO">
+		SELECT * FROM user WHERE ID=#{id}
+	</select>
+	<select id="selectAll" resultType="UserVO">
+		SELECT * FROM user WHERE ddate IS NULL
+	</select>
+	<insert id="insert" parameterType="uservo">
+		INSERT INTO user VALUES (#{id},#{name},#{pwd},#{email},SYSDATE(),NULL,NULL)
+	</insert>
+	<update id="update" parameterType="UserVO">
+		UPDATE user 
+		SET NAME = #{name},
+        	PWD = #{pwd},
+        	EMAIL = #{email},
+			udate = SYSDATE()
+		WHERE ID=#{id}			
+	</update>
+	<delete id="delete" parameterType="UserVO">
+		UPDATE user 
+		SET ddate = SYSDATE()
+		WHERE id=#{id}
+	</delete>	
+
+</mapper>
+
+
+
+
+
+

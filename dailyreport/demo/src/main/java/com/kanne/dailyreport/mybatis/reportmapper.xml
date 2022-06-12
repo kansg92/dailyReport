@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	
+	
+<mapper namespace="com.kanne.dailyreport.dao.ReportDao">
+	
+	<select id="select" parameterType="String" resultType="ReportVO">
+		SELECT * FROM report WHERE ID=#{id}
+	</select>
+	<select id="selectAll" resultType="ReportVO">
+		SELECT * FROM report WHERE ddate IS NULL
+	</select>
+	<insert id="insert" parameterType="ReportVO">
+		INSERT INTO report VALUES (null,SYSDATE(),#{stime},#{etime},#{contents},#{feedback},#{catecode},#{immercode},#{uid})
+	</insert>
+	<update id="update" parameterType="ReportVO">
+		UPDATE report 
+		SET NAME = #{name},
+        	PWD = #{pwd},
+        	EMAIL = #{email},
+			udate = SYSDATE()
+		WHERE ID=#{id}			
+	</update>
+	<delete id="delete" parameterType="ReportVO">
+		UPDATE report 
+		SET ddate = SYSDATE()
+		WHERE id=#{id}
+	</delete>	
+
+</mapper>
+
+
+
+
+
+

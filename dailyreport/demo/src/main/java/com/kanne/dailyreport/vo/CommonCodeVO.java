@@ -14,26 +14,26 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class CommonCodeVO {
-	private int scode;
-	private Integer comcode;
+	private int detail_code;
+	private Integer common_code;
 	private String name;
-	private Date regdate;
-	private Date udate;
-	private Date ddate;
+	private Date reg_date;
+	private Date up_date;
+	private Date del_date;
 	
-	public CommonCodeVO(int scode, Integer comcode, String name) {
-		this.scode = scode;
-		this.comcode = comcode;
+	public CommonCodeVO(int detail_code, Integer common_code, String name) {
+		this.detail_code = detail_code;
+		this.common_code = common_code;
 		this.name = name;
 	}
 
-	public CommonCodeVO(int scode, String name) {
-		this.scode = scode;
+	public CommonCodeVO(int detail_code, String name) {
+		this.detail_code = detail_code;
 		this.name = name;
 	}
 
-	public CommonCodeVO(int scode) {
-		this.scode = scode;
+	public CommonCodeVO(int detail_code) {
+		this.detail_code = detail_code;
 	}
 	
 	

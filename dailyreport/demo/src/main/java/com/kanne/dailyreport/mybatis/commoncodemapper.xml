@@ -8,27 +8,27 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 <mapper namespace="com.kanne.dailyreport.dao.CommonCodeDao">
 	
 	<select id="select" parameterType="int" resultType="CommonCodeVO">
-		SELECT * FROM commoncode WHERE scode=#{scode}
+		SELECT * FROM commoncode WHERE detail_code=#{detail_code}
 	</select>
-	<select id="selectComCode" parameterType="int" resultType="CommonCodeVO">
-		SELECT * FROM commoncode WHERE comcode=#{comcode}
+	<select id="selectCommonCode" parameterType="int" resultType="CommonCodeVO">
+		SELECT * FROM commoncode WHERE common_code=#{common_code}
 	</select>
 	<select id="selectAll" resultType="CommonCodeVO">
-		SELECT * FROM commoncode WHERE ddate IS NULL
+		SELECT * FROM commoncode WHERE del_date IS NULL
 	</select>
 	<insert id="insert" parameterType="CommonCodeVO">
-		INSERT INTO commoncode VALUES (#{scode},#{comcode},#{name},SYSDATE(),NULL,NULL)
+		INSERT INTO commoncode VALUES (#{detail_code},#{common_code},#{name},SYSDATE(),NULL,NULL)
 	</insert>
 	<update id="update" parameterType="CommonCodeVO">
 		UPDATE commoncode 
 		SET NAME = #{name},
-			udate = SYSDATE()
-		WHERE SCODE=#{scode}			
+			up_date = SYSDATE()
+		WHERE detail_code=#{detail_code}			
 	</update>
 	<delete id="delete" parameterType="CommonCodeVO">
 		UPDATE commoncode 
-		SET ddate = SYSDATE()
-		WHERE SCODE=#{scode}
+		SET del_date = SYSDATE()
+		WHERE detail_code=#{detail_code}
 	</delete>	
 
 </mapper>

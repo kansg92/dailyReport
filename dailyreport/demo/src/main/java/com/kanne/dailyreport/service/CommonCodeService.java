@@ -48,4 +48,10 @@ public class CommonCodeService implements Service<CommonCodeVO, Integer> {
 		return dao.selectComCode(k);
 	}
 
+	@Override
+	public void trueRemove(Integer k) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

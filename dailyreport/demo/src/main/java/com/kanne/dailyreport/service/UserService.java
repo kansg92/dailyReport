@@ -43,6 +43,12 @@ public class UserService implements Service<UserVO, String> {
 		// TODO Auto-generated method stub
 		return dao.selectAll();
 	}
+
+	@Override
+	public void trueRemove(String k) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 

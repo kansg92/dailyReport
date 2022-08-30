@@ -11,10 +11,10 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM report WHERE ID=#{id}
 	</select>
 	<select id="selectAll" resultType="ReportVO">
-		SELECT * FROM report WHERE ddate IS NULL
+		SELECT * FROM report WHERE del_date IS NULL
 	</select>
 	<insert id="insert" parameterType="ReportVO">
-		INSERT INTO report VALUES (null,SYSDATE(),#{stime},#{etime},#{contents},#{feedback},#{catecode},#{immercode},#{uid})
+		INSERT INTO report VALUES (null,SYSDATE(),#{start_time},#{end_time},#{contents},#{feedback},#{catecode},#{immercode},#{uid})
 	</insert>
 	<update id="update" parameterType="ReportVO">
 		UPDATE report 
@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</update>
 	<delete id="delete" parameterType="ReportVO">
 		UPDATE report 
-		SET ddate = SYSDATE()
+		SET del_date = SYSDATE()
 		WHERE id=#{id}
 	</delete>	
 

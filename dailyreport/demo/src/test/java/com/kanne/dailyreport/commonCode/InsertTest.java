@@ -15,7 +15,7 @@ class InsertTest {
 	
 	@Test
 	void contextLoads() {
-		CommonCodeVO obj = new CommonCodeVO(2070,2000,"기타");
+		CommonCodeVO obj = new CommonCodeVO(1050,1000,"하");
 		
 		try {
 			service.register(obj);

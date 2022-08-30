@@ -18,9 +18,9 @@ public class UserVO {
 	private String name;
 	private String pwd;
 	private String email;
-	private Date regdate;
-	private Date udate;
-	private Date ddate;
+	private Date reg_date;
+	private Date up_date;
+	private Date del_date;
 	public UserVO(String id, String name, String pwd, String email) {
 		this.id = id;
 		this.name = name;

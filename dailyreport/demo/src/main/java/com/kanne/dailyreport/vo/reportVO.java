@@ -15,9 +15,9 @@ import lombok.ToString;
 @ToString
 public class ReportVO {
 	private int id;
-	private Date regdate;
-	private String stime;
-	private String etime;
+	private Date reg_date;
+	private String start_time;
+	private String end_time;
 	private String contents;
 	private int catecode;
 	private String category;
@@ -25,10 +25,11 @@ public class ReportVO {
 	private String immersion;
 	private String feedback;
 	private String uid;
-	public ReportVO(String stime, String etime, String contents, int catecode, int immercode, String feedback,
+	
+	public ReportVO(String start_time, String end_time, String contents, int catecode, int immercode, String feedback,
 			String uid) {
-		this.stime = stime;
-		this.etime = etime;
+		this.start_time = start_time;
+		this.end_time = end_time;
 		this.contents = contents;
 		this.catecode = catecode;
 		this.immercode = immercode;

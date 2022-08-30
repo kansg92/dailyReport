@@ -15,7 +15,7 @@ class updateTest2 {
 	
 	@Test
 	void contextLoads() {
-		UserVO obj = new UserVO("id03","kan2","pwd022","kansg22@naver.com");
+		UserVO obj = new UserVO("id03","이름","성","pwd022","kansg22@naver.com");
 		
 		try {
 			service.modify(obj);

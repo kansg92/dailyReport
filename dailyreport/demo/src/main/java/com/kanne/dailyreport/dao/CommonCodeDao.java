@@ -14,7 +14,7 @@ public interface CommonCodeDao {
 	public void update(CommonCodeVO code) throws Exception;
 	public void delete(CommonCodeVO code) throws Exception;
 	
-	public CommonCodeVO select(int scode) throws Exception;
+	public CommonCodeVO select(int detail_code) throws Exception;
 	public List<CommonCodeVO> selectAll() throws Exception;
 	public List<CommonCodeVO> selectComCode(int comcode) throws Exception;
 }

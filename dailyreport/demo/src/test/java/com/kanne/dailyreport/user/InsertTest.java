@@ -15,7 +15,7 @@ class InsertTest {
 	
 	@Test
 	void contextLoads() {
-		UserVO obj = new UserVO("id03","kan","pwd02","kansg@naver.com");
+		UserVO obj = new UserVO("id03","승기","간","pwd02","kansg@naver.com");
 		
 		try {
 			service.register(obj);

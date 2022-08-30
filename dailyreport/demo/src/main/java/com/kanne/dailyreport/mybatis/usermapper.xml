@@ -14,13 +14,14 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM user WHERE del_date IS NULL
 	</select>
 	<insert id="insert" parameterType="uservo">
-		INSERT INTO user VALUES (#{id},#{name},#{pwd},#{email},SYSDATE(),NULL,NULL)
+		INSERT INTO user VALUES (#{id},#{first_name},#{last_name},#{pwd},#{email},SYSDATE(),NULL,NULL)
 	</insert>
 	<update id="update" parameterType="UserVO">
 		UPDATE user 
-		SET NAME = #{name},
-        	PWD = #{pwd},
-        	EMAIL = #{email},
+		SET first_name= #{name},
+			last_name= #{name},
+        	pwd = #{pwd},
+        	email = #{email},
 			up_date = SYSDATE()
 		WHERE ID=#{id}			
 	</update>

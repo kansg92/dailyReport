@@ -1,0 +1,12 @@
+table > tbody > tr > td{
+	font-size:13px;
+}
+
+table > thead > tr > th{
+	text-align: center !important;
+}
+
+.report-time{
+	text-align: center;
+	width:6%;
+}

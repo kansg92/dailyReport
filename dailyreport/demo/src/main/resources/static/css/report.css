@@ -10,3 +10,11 @@ table > thead > tr > th{
 	text-align: center;
 	width:6%;
 }
+
+input[name="contents"]{
+	width:100%;
+}
+
+.feedbackArea{
+	width: 100%;
+}

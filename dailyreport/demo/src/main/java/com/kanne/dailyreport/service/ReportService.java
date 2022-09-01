@@ -49,5 +49,9 @@ public class ReportService implements Service<ReportVO, Integer> {
 		// TODO Auto-generated method stub
 		dao.delete(v);
 	}
+	
+	public ReportVO checkDate(String day) throws Exception{
+		return dao.checkDate(day);
+	}
 
 }

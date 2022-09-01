@@ -16,4 +16,5 @@ public interface ReportDao {
 	public void delete(ReportVO report) throws Exception;
 	public ReportVO select(int id) throws Exception;
 	public List<ReportVO> selectAll() throws Exception;
+	public ReportVO checkDate(String day) throws Exception;
 }

@@ -11,7 +11,15 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM commoncode WHERE detail_code=#{detail_code}
 	</select>
 	<select id="selectCommonCode" parameterType="int" resultType="CommonCodeVO">
-		SELECT * FROM commoncode WHERE common_code=#{common_code}
+		select code1.detail_code,code1.name,code2.name as name2, code3.name as name3,code1.reg_date from commoncode code1
+			INNER JOIN commoncode code2 on code1.common_code = code2.detail_code
+			INNER JOIN commoncode code3 on code2.common_code = code3.detail_code
+			where code3.detail_code = 2000;
+	</select>
+	<select id="getimmersion" resultType="CommonCodeVO">
+		select code1.detail_code,code1.name,code2.name as name2,code1.reg_date from commoncode code1
+			INNER JOIN commoncode code2 on code1.common_code = code2.detail_code
+			where code2.detail_code = 1000
 	</select>
 	<select id="selectAll" resultType="CommonCodeVO">
 		SELECT * FROM commoncode WHERE del_date IS NULL
@@ -30,6 +38,8 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SET del_date = SYSDATE()
 		WHERE detail_code=#{detail_code}
 	</delete>	
+	
+	
 
 </mapper>
 

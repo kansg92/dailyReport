@@ -44,14 +44,18 @@ public class CommonCodeService implements Service<CommonCodeVO, Integer> {
 		return dao.selectAll();
 	}
 	
-	public List<CommonCodeVO> getComCode(Integer k) throws Exception{
-		return dao.selectComCode(k);
+	public List<CommonCodeVO> selectCommonCode() throws Exception{
+		return dao.selectCommonCode();
 	}
 
 	@Override
 	public void trueRemove(Integer k) throws Exception {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public List<CommonCodeVO> getImmersion() throws Exception{
+		return dao.getimmersion();
 	}
 
 }

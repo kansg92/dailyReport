@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	
+	
+<mapper namespace="com.kanne.dailyreport.dao.ReportDetailDao">
+	
+	<select id="select" parameterType="int" resultType="ReportDetailVO">
+		SELECT * FROM reportdetail WHERE ID=#{id}
+	</select>
+	<select id="selectAll" resultType="ReportDetailVO">
+		SELECT * FROM reportdetail WHERE del_date IS NULL
+	</select>
+	<insert id="insert" parameterType="ReportDetailVO">
+		INSERT INTO reportdetail VALUES (null,#{start_time},#{end_time},#{contents},#{catecode},#{immercode},#{report_id},SYSDATE(),null,null)
+	</insert>
+	<insert id="insertMap" parameterType="Map">
+		INSERT INTO reportdetail VALUES (null,#{start_time},#{end_time},#{contents},#{catecode},#{immercode},#{report_id},SYSDATE(),null,null)
+	</insert>
+	<update id="update" parameterType="ReportDetailVO">
+		UPDATE reportdetail 
+		SET start_time = #{start_time},
+			end_time = #{end_time},
+			contents = #{contents},
+			catecode = #{catecode},
+			immercode = #{immercode},
+        	up_date = #{up_date}
+		WHERE id=#{id}			
+	</update>
+	<delete id="delete" parameterType="ReportDetailVO">
+		UPDATE reportdetail 
+		SET del_date = SYSDATE()
+		WHERE id=#{id}
+	</delete>	
+
+</mapper>
+
+
+
+
+
+

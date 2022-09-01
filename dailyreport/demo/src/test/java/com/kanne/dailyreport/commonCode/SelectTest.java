@@ -20,7 +20,7 @@ class SelectTest {
 		List<CommonCodeVO> list = null;
 		
 		try {
-			list = service.getComCode(1000);
+			list = service.selectCommonCode();
 			System.out.println(service.get(1000));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

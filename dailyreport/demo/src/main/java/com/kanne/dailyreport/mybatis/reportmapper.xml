@@ -7,28 +7,29 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	
 <mapper namespace="com.kanne.dailyreport.dao.ReportDao">
 	
-	<select id="select" parameterType="String" resultType="ReportVO">
+	<select id="select" parameterType="int" resultType="ReportVO">
 		SELECT * FROM report WHERE ID=#{id}
 	</select>
 	<select id="selectAll" resultType="ReportVO">
 		SELECT * FROM report WHERE del_date IS NULL
 	</select>
-	<insert id="insert" parameterType="ReportVO">
-		INSERT INTO report VALUES (null,SYSDATE(),#{start_time},#{end_time},#{contents},#{feedback},#{catecode},#{immercode},#{uid})
+	<insert id="insert" parameterType="ReportVO" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO report VALUES (null,#{feedback},#{day},SYSDATE(),null,null,#{uid})
 	</insert>
 	<update id="update" parameterType="ReportVO">
 		UPDATE report 
-		SET NAME = #{name},
-        	PWD = #{pwd},
-        	EMAIL = #{email},
-			udate = SYSDATE()
-		WHERE ID=#{id}			
+		SET feedback = #{feedback},
+        	up_date = #{up_date}
+		WHERE id=#{id}			
 	</update>
 	<delete id="delete" parameterType="ReportVO">
 		UPDATE report 
 		SET del_date = SYSDATE()
 		WHERE id=#{id}
 	</delete>	
+	<select id="checkDate" parameterType="String" resultType="ReportVO">
+		SELECT * FROM report where day = #{day}
+	</select>
 
 </mapper>
 

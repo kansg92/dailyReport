@@ -14,16 +14,18 @@ class InsertTest {
 	ReportService service;
 	
 	@Test
-	void contextLoads() {
-		ReportVO obj = new ReportVO("00:00", "06:00", "sleep", 2020, 1010, "feedback", "ID01");
+	void contextLoads() { 
+		
+		ReportVO obj = new ReportVO(null,"2022-09-01",null,null,null,"feedback","test");
 		
 		try {
 			service.register(obj);
-			System.out.println("완료");
+			System.out.println(obj);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
 
 }

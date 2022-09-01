@@ -21,6 +21,9 @@ public class CommonCodeVO {
 	private Date up_date;
 	private Date del_date;
 	
+	private String name2;
+	private String name3;
+	
 	public CommonCodeVO(int detail_code, Integer common_code, String name) {
 		this.detail_code = detail_code;
 		this.common_code = common_code;

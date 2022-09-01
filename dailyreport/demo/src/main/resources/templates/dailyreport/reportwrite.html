@@ -17,35 +17,46 @@
 	</div>
 	<div class="card mb-4">
 		<div class="card-header">
-			<i class="fas fa-table me-1"></i> Daily Report
+			<i class="fas fa-table me-1"></i> Daily Report - Write
 		</div>
 		<div class="card-body">
-			<table id="datatable-dailyReportWrite" class="display">
-				<thead>
-					<tr>
-						<th>시간</th><th colspan="12">리포트</th><th>몰입도</th><th>비고</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="time : ${#numbers.sequence(0,24)}">
-					<td th:text="${time}+' : 00'" class="report-time">0:00</td>
-					<td class="category">공부</td>
-					<td>분</td>
-					<td>한일</td>
-					<td class="category">공부</td>
-					<td>분</td>
-					<td>한일</td>
-					<td class="category">공부</td>
-					<td>분</td>
-					<td>한일</td>
-					<td class="category">공부</td>
-					<td>분</td>
-					<td>한일</td>
-					<td>최상</td>
-					<td>비고</td>
-					</tr>
-				</tbody>
-			</table>
+			<input type="date" name="day">
+			<form  id="daily-form">
+				<table id="datatable-dailyReportWrite" class="display">
+					<thead>
+						<tr>
+							<th>시작시간</th><th>종료시간</th><th>항목</th><th>한 일</th><th>몰입도</th>
+						</tr>
+					</thead>
+					<tbody id="daily_tbody">
+						<tr>
+							<td style="width:5%;"><input type = "text" name="start_time" id="startTime0" class="timepicker" value="00:00" disabled></td>
+							<td style="width:5%;"><input type = "text" name="end_time" id="endTime0" class="timepicker" value="00:15"></td>
+							<td style="width:5%;" class="category">
+								<select name="catecode">
+									<option th:each="category : ${category}" th:value="${category.detail_code}" th:text="${category.name}"></option>
+								</select>
+							</td>
+							<td>
+								<input name="contents" type="text" id="contents0">
+							</td>
+							<td>
+								<select name="immercode">
+									<option th:each="immersion : ${immersion}" th:value="${immersion.detail_code}" th:text="${immersion.name}"></option>
+								</select>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>	
+			<textarea rows="4" name="feedback" class="feedbackArea" placeholder="하루에대한 평가와 내일의 다짐을 새로 작성해보세요."></textarea>
+			<input th:if="${session.loginuser} != null" th:value="${session.loginuser.id}" name="uid" hidden>
+		</div>
+		
+		<div id="buttonBox">
+		<button id="addBtn" type="button" class="btn btn-danger" >ADD</button>
+		<span id="cautionText"></span>
+		<button id="daily-saveBtn" class="btn btn-success" type="button" >SAVE</button>
 		</div>
 	</div>
 </div>

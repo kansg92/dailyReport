@@ -53,39 +53,44 @@ public class AjaxController {
 		return immersion;
 	}
 	@RequestMapping("/dailyReportsubmit")
-	public String dailyReportsubmit(String jsonString, ReportVO report) {
+	public String dailyReportsubmit(String jsonString, ReportVO report,String check) {
 		JSONParser parser = new JSONParser();
+		System.out.println(jsonString);
+		System.out.println(report);
 		try {
-			System.out.println(report);
-			System.out.println("day::"+reportService.checkDate(report.getDay()));
-			if(reportService.checkDate(report.getDay()) != null) {
-				return "dayoverwrite";
-			}
 			JSONArray jsonarr = (JSONArray) parser.parse(jsonString);
 			HashMap<String, String> map = new HashMap<String, String>();
 			String key = "";
 			String value = "";
+			if(check.equals("save")) {
+				if(reportService.checkDate(report.getDay()) != null) {
+					return "dayoverwrite";
+				}
+			}
+
 			reportService.register(report);
-			for(int i = 0; i < jsonarr.size(); i++) {
-				JSONObject jsonObj = (JSONObject) jsonarr.get(i);
+			
+			for(int i = 1; i < jsonarr.size()+1; i++) {
+				JSONObject jsonObj = (JSONObject) jsonarr.get(i-1);
 				key = jsonObj.get("name").toString();
 				value = jsonObj.get("value").toString();
+				System.out.println("i ::"+i+", key::"+key+", value::"+value);
 				map.put(jsonObj.get("name").toString(), jsonObj.get("value").toString());
-				if(i % 4 == 0 && i != 0) {
+				
+				if(i % 6 == 0) {
 					map.put("report_id", Integer.toString(report.getId()));
 					System.out.println("map::"+map);
-					reportDetailService.inserMap(map);
+					reportDetailService.insertMap(map);
 				}
+				
+			 
 				
 			}
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return "fail";
 		}
-		
-		
-		
 		
 		return "success";
 	}

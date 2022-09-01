@@ -1,0 +1,71 @@
+<meta charset="utf-8" />
+<script src="/js/dailyreportwrite.js"></script>
+<link href="/css/report.css" rel="stylesheet">
+<div class="container-fluid px-4">
+	<h1 class="mt-4">Report Modify Page</h1>
+	<ol class="breadcrumb mb-4">
+		<li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+		<li class="breadcrumb-item active">Tables</li>
+	</ol>
+	<div class="card mb-4">
+		<div class="card-body">
+			DataTables is a third party plugin that is used to generate the demo
+			table below. For more information about DataTables, please visit the
+			<a target="_blank" href="https://datatables.net/">official
+				DataTables documentation</a> .
+		</div>
+	</div>
+	<div class="card mb-4">
+		<div class="card-header">
+			<i class="fas fa-table me-1"></i> Daily Report - Modify <sapn th:text="${selectedReport.day}+')'"></sapn>
+		</div>
+		<div class="card-body">
+			<input type="date" name="day" th:value="${selectedReport.day}" hidden>
+			<input type="text" name="reportId" th:value="${selectedReport.id}" hidden>
+			<form  id="daily-form">
+				<table id="datatable-dailyReportWrite" class="display">
+					<thead>
+						<tr>
+							<th>시작시간</th><th>종료시간</th><th>항목</th><th>한 일</th><th>몰입도</th>
+						</tr>
+					</thead>
+					<tbody id="daily_tbody">
+						<tr th:each="report : ${detailList}"><span id="size" class="hidden" th:text="${reportStat.size-1}"></span>
+							<td class="hidden"><input th:value="${report.id}" name="id"> </td>
+							<td style="width:5%;"><input type = "text" name="start_time" th:id="'startTime'+${reportStat.index}" class="timepicker" th:value="${#strings.substring(report.start_time,0,5)}"></td>
+							<td style="width:5%;"><input type = "text" name="end_time" th:id="'endTime'+${reportStat.index}" class="timepicker" th:value="${#strings.substring(report.end_time,0,5)}"></td>
+							<td style="width:5%;" class="category">
+								<select name="catecode">
+									<option th:if="${category.detail_code} == ${report.catecode}" selected th:text="${report.category}"
+									 th:each="category : ${category}" th:value="${report.catecode}" ></option>
+									 <option th:unless="${category.detail_code} == ${report.catecode}" th:text="${category.name}"
+									 th:each="category : ${category}" th:value="${category.detail_code}" ></option>
+								</select>
+							</td>
+							<td>
+								<input name="contents" type="text" id="contents0" th:value="${report.contents}">
+							</td>
+							<td>
+								<select name="immercode">
+									<option th:if="${immersion.detail_code} == ${report.immercode}" selected
+									 th:each="immersion : ${immersion}" th:value="${report.immercode}" th:text="${report.immersion}"></option>
+									<option th:unless="${immersion.detail_code} == ${report.immercode}"  
+									th:each="immersion : ${immersion}" th:value="${immersion.detail_code}" th:text="${immersion.name}"></option>
+									
+								</select>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>	
+				<textarea rows="4" name="feedback" class="feedbackArea" th:text="${selectedReport.feedback}"> </textarea>
+				<input th:if="${session.loginuser} != null" th:value="${session.loginuser.id}" name="uid" hidden>
+		</div>
+		
+		<div id="buttonBox">
+		<button id="addBtn" type="button" class="btn btn-danger" >ADD</button>
+		<span id="cautionText"></span>
+		<button id="daily-modifyBtn" class="btn btn-success" type="button" >SAVE</button>
+		</div>
+	</div>
+</div>

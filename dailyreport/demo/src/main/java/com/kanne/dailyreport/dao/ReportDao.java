@@ -17,4 +17,5 @@ public interface ReportDao {
 	public ReportVO select(int id) throws Exception;
 	public List<ReportVO> selectAll() throws Exception;
 	public ReportVO checkDate(String day) throws Exception;
+	public List<ReportVO> getReportList(String id) throws Exception;
 }

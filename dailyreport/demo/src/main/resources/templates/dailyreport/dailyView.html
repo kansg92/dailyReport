@@ -1,1 +1,42 @@
-<h1>dailyView Page</h1>
+<meta charset="utf-8" />
+<script src="/js/dailyreportDetail.js"></script>
+<link href="/css/report.css" rel="stylesheet">
+<div class="container-fluid px-4">
+	<h1 class="mt-4">Report View Page</h1>
+	<ol class="breadcrumb mb-4">
+		<li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+		<li class="breadcrumb-item active">Tables</li>
+	</ol>
+	<div class="card mb-4">
+		<div class="card-body">
+			DataTables is a third party plugin that is used to generate the demo
+			table below. For more information about DataTables, please visit the
+			<a target="_blank" href="https://datatables.net/">official
+				DataTables documentation</a> .
+		</div>
+	</div>
+	<div class="card mb-4">
+		<div class="card-header">
+			<i class="fas fa-table me-1"></i> Daily Report - View
+		</div>
+		<div class="card-body">
+			<form  id="daily-form">
+				<table id="datatable-dailyReportView" class="display">
+					<thead>
+						<tr>
+							<th>일자</th><th>작성일</th><th>수정일</th><th>몰입도점수</th>
+						</tr>
+					</thead>
+					<tbody id="daily_tbody">
+						<tr th:each="report : ${report}" th:onClick="goDetailView([[${report.id}]])">
+							<td th:text="${report.day}"></td>
+							<td th:text="${report.reg_date}"></td>
+							<td th:text="${report.up_date}"></td>
+							<td th:text="${report.score}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</form>	
+		</div>
+	</div>
+</div>

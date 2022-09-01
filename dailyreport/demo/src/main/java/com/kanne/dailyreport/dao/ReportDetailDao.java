@@ -19,4 +19,5 @@ public interface ReportDetailDao {
 	public List<ReportDetailVO> selectAll() throws Exception;
 	
 	public void insertMap(HashMap<String, String> map) throws Exception;
+	public List<ReportDetailVO> getDetail(int report_id) throws Exception;
 }

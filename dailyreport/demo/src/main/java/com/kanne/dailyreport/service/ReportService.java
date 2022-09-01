@@ -53,5 +53,8 @@ public class ReportService implements Service<ReportVO, Integer> {
 	public ReportVO checkDate(String day) throws Exception{
 		return dao.checkDate(day);
 	}
-
+	
+	public List<ReportVO> getReportList(String id) throws Exception{
+		return dao.getReportList(id);
+	}
 }

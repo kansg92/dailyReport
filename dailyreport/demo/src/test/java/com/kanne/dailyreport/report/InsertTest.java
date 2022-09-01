@@ -16,11 +16,11 @@ class InsertTest {
 	@Test
 	void contextLoads() { 
 		
-		ReportVO obj = new ReportVO(null,"2022-09-01",null,null,null,"feedback","test");
+		//ReportVO obj = new ReportVO(null,"2022-09-01",null,null,null,"feedback","test");
 		
 		try {
-			service.register(obj);
-			System.out.println(obj);
+		//	service.register(obj);
+		//	System.out.println(obj);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

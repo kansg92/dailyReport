@@ -18,3 +18,7 @@ input[name="contents"]{
 .feedbackArea{
 	width: 100%;
 }
+
+#modify-btn{
+	color:white;
+}

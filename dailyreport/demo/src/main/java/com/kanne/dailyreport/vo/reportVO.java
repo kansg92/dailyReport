@@ -19,4 +19,5 @@ public class ReportVO {
 	private String del_date;
 	private String feedback;
 	private String uid;
+	private double score;
 }

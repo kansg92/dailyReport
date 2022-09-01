@@ -17,7 +17,21 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		INSERT INTO reportdetail VALUES (null,#{start_time},#{end_time},#{contents},#{catecode},#{immercode},#{report_id},SYSDATE(),null,null)
 	</insert>
 	<insert id="insertMap" parameterType="Map">
-		INSERT INTO reportdetail VALUES (null,#{start_time},#{end_time},#{contents},#{catecode},#{immercode},#{report_id},SYSDATE(),null,null)
+		INSERT INTO reportdetail VALUES (
+		<if test="id == 0">
+		null,
+		</if>
+		<if test="id != 0">
+		#{id},
+		</if>
+		#{start_time},#{end_time},#{contents},#{catecode},#{immercode},#{report_id},SYSDATE(),null,null)
+		ON DUPLICATE KEY UPDATE start_time = #{start_time},
+								end_time = #{end_time},
+								contents = #{contents},
+								catecode = #{catecode},
+								immercode = #{immercode},
+					        	up_date = #{up_date}
+		
 	</insert>
 	<update id="update" parameterType="ReportDetailVO">
 		UPDATE reportdetail 
@@ -34,6 +48,15 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SET del_date = SYSDATE()
 		WHERE id=#{id}
 	</delete>	
+	<select id="getDetail" parameterType="int" resultType="ReportDetailVO">
+		select rd.id, rd.start_time, rd.end_time, rd.contents, rd.catecode, code.name AS category, rd.immercode, code2.name AS immersion, 
+			rd.report_id, rd.reg_date, rd.up_date, rd.del_date 
+			from reportdetail rd
+			INNER JOIN commoncode code ON rd.catecode = code.detail_code
+			INNER JOIN commoncode code2 ON rd.immercode = code2.detail_code
+			WHERE rd.report_id = #{report_id} 
+			ORDER BY rd.start_time
+	</select>
 
 </mapper>
 

@@ -45,7 +45,11 @@ public class ReportDetailService implements Service<ReportDetailVO, Integer> {
 		return dao.selectAll();
 	}
 	
-	public void inserMap(HashMap<String, String> map) throws Exception{
+	public void insertMap(HashMap<String, String> map) throws Exception{
 		dao.insertMap(map);
+	}
+	
+	public List<ReportDetailVO> getDetail(int report_id) throws Exception {
+		return dao.getDetail(report_id);
 	}
 }

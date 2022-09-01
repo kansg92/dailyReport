@@ -1,0 +1,55 @@
+<meta charset="utf-8" />
+<script src="/js/dailyreportDetail.js"></script>
+<link href="/css/report.css" rel="stylesheet">
+<div class="container-fluid px-4">
+	<h1 class="mt-4">Report View Page</h1>
+	<ol class="breadcrumb mb-4">
+		<li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+		<li class="breadcrumb-item active">Tables</li>
+	</ol>
+	<div class="card mb-4">
+		<div class="card-body">
+			DataTables is a third party plugin that is used to generate the demo
+			table below. For more information about DataTables, please visit the
+			<a target="_blank" href="https://datatables.net/">official
+				DataTables documentation</a> .
+		</div>
+	</div>
+	<div class="card mb-4">
+		<div class="card-header">
+			<i class="fas fa-table me-1"></i> Daily Report - DetailView (
+			<sapn th:text="${selectedReport.day}+')'"></sapn>
+		</div>
+		<div class="card-body">
+			<form id="daily-form">
+				<table id="datatable-dailyReportDetailView" class="display">
+					<thead>
+						<tr>
+							<th>시작시간</th>
+							<th>종료시간</th>
+							<th>항목</th>
+							<th>한 일</th>
+							<th>몰입도</th>
+						</tr>
+					</thead>
+					<tbody id="daily_tbody">
+						<tr th:each="report : ${report}">
+							<td th:text="${#strings.substring(report.start_time,0,5)}"></td>
+							<td th:text="${#strings.substring(report.end_time,0,5)}"></td>
+							<td th:text="${report.category}"></td>
+							<td th:text="${report.contents}"></td>
+							<td th:text="${report.immersion}"></td>
+						</tr>
+					</tbody>
+				</table>
+				<textarea rows="4" name="feedback" class="feedbackArea"
+					readonly="readonly" th:text="${selectedReport.feedback}"></textarea>
+			</form>
+		</div>
+
+		<div id="buttonBox">
+			<button id="modify-btn" type="button" class="btn btn-warning"
+				th:onClick="goModify([[${selectedReport.id}]])">Modify</button>
+		</div>
+	</div>
+</div>

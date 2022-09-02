@@ -22,3 +22,12 @@ input[name="contents"]{
 #modify-btn{
 	color:white;
 }
+
+.incorrectTime{
+	color: red;
+	font-weight: bold;
+}
+
+#cautionText{
+	color: red;
+}

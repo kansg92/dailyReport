@@ -7,7 +7,8 @@ window.addEventListener('DOMContentLoaded', event => {
     const dailyReportDetailView = document.getElementById('datatable-dailyReportDetailView');
     if (datatablesSimple) {
         new simpleDatatables.DataTable(datatablesSimple, {
-			paging :false
+			paging :false,
+			searchable : false
 		});
     }
     if(dailyReportView){

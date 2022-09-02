@@ -32,7 +32,7 @@
 					<tbody id="daily_tbody">
 						<tr th:each="report : ${detailList}"><span id="size" class="hidden" th:text="${reportStat.size-1}"></span>
 							<td class="hidden"><input th:value="${report.id}" name="id"> </td>
-							<td style="width:5%;"><input type = "text" name="start_time" th:id="'startTime'+${reportStat.index}" class="timepicker" th:value="${#strings.substring(report.start_time,0,5)}"></td>
+							<td style="width:5%;"><input type = "text" name="start_time" th:id="'startTime'+${reportStat.index}" class="timepicker" th:value="${#strings.substring(report.start_time,0,5)}" disabled></td>
 							<td style="width:5%;"><input type = "text" name="end_time" th:id="'endTime'+${reportStat.index}" class="timepicker" th:value="${#strings.substring(report.end_time,0,5)}"></td>
 							<td style="width:5%;" class="category">
 								<select name="catecode">

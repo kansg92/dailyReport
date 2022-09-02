@@ -4,17 +4,10 @@ let checking = "";
 
 $(document).ready(function(){
 	if($('#size').text() != null ){
-	cnt = Number($('#size').text());
+		cnt = Number($('#size').text());
 	}
-	console.log(cnt);
-	console.log($('#size').text());
-	$('#startTime0').attr("disabled",true);
-	$('input.timepicker').timepicker({
-        timeFormat: 'HH:mm',
-        interval: 15,
-        startTime: '00:00',
-        scrollbar: true
-	});
+	setTimepicker();
+	
 	
 	$('#addBtn').click(function(){		
 		const endTime = $("#endTime"+cnt).val();	
@@ -34,7 +27,7 @@ $(document).ready(function(){
 	
 	$('#daily-saveBtn').click(function(){	
 		var check = checkvalidation();
-		var check2 = feedbackCheck();
+		var check2 = saveCheck();
 		if(check && check2){
 			$('input').attr("disabled",false);
 			const sa = $('#daily-form').serializeArray();
@@ -46,7 +39,7 @@ $(document).ready(function(){
 	
 	$('#daily-modifyBtn').click(function(){
 		var check = checkvalidation();
-		var check2 = feedbackCheck();
+		var check2 = saveCheck();
 		if(check && check2){
 			$('input').attr("disabled",false);
 			const sa = $('#daily-form').serializeArray();
@@ -55,8 +48,24 @@ $(document).ready(function(){
 			senddata(jsa,checking);
 		}		
 	});
+	
 
-})
+}); // ready
+
+function setTimepicker(){
+	$('input.timepicker').timepicker({
+        timeFormat: 'HH:mm',
+        interval: 15,
+        startTime: '00:00',
+        scrollbar: true,
+        change : function() {
+			var endtime = $(this).val();
+			var str = $(this).attr("id");
+			var num = Number(str.substring(7));
+			modifyNextTime(num,endtime);
+        }
+	});
+}
 
 function calculatorTime(){
 	let startHours = Number($('#startTime'+(cnt-1)).val().split(':')[0]);
@@ -69,9 +78,9 @@ function calculatorTime(){
 		end_time = 24*60;
 	}
 	let tiemInterval = end_time - start_time;
-	console.log("start_time::"+start_time);
+/*	console.log("start_time::"+start_time);
 	console.log("end_time::"+end_time);
-	console.log("tiemInterval::"+tiemInterval);
+	console.log("tiemInterval::"+tiemInterval);*/
 	
 	
 }
@@ -81,7 +90,6 @@ function senddata(jsa,checking){
 	const uid = $('input[name="uid"]').val();
 	const day = $('input[name="day"]').val();
 	const id = $('input[name="reportId"]').val();
-	console.log(id);
 	$.ajax({
 		url:'/dailyReportsubmit',
 		data:{
@@ -105,13 +113,29 @@ function senddata(jsa,checking){
 	})
 }	
 
+function modifyNextTime(num,endtime){
+	if($('#startTime'+(num+1)).val() != undefined){
+		var check = checkNextTime(num)
+		if(check){
+			$('#startTime'+(num+1)).val(endtime)
+			$('#cautionText').text('');
+			$('#endTime'+num).removeClass("incorrectTime");
+		}else{
+			console.log('#endTime'+num)
+			$('#endTime'+num).addClass("incorrectTime");
+		}
+
+	};
+};
+
+
 function addRow (endTime,data){
 	cnt ++;
 	calculatorTime()
 	var txt = 	'<tr>'+
 					'<td class="hidden"><input value="0" name="id"> </td>'+
-					'<td style="width:5%;"><input type = "text" name="start_time" id="startTime'+cnt+'" class="timepicker" value="'+endTime+'"></td>'+
-					'<td style="width:5%;"><input type = "text" name="end_time" id="endTime'+cnt+'" class="timepicker" value="'+endTime+'"></td>'+
+					'<td style="width:5%;"><input name="start_time" id="startTime'+cnt+'" class="timepicker" value="'+endTime+'" disabled></td>'+
+					'<td style="width:5%;"><input name="end_time" id="endTime'+cnt+'" class="timepicker" value="'+endTime+'" ></td>'+
 					'<td style="width:5%;" class="category">'+
 						'<select name="catecode" id="category'+cnt+'">'+
 						'</select>'+
@@ -127,12 +151,7 @@ function addRow (endTime,data){
 				'</tr>';
 	$('#daily_tbody').append(txt);
 	addCategory(data);
-	$('input.timepicker').timepicker({
-        timeFormat: 'HH:mm',
-        interval: 15,
-        startTime: '00:00',
-        scrollbar: true
-	});
+	setTimepicker();
 	
 }	
 
@@ -177,17 +196,34 @@ function checkvalidation(){
 	
 };
 
+function checkNextTime(num){
+	console.log("starttime::"+$('#startTime'+num).val())
+	console.log("endtime::"+$('#endTime'+num).val())
+	if($('#endTime'+num).val() === $('#startTime'+num).val() ){
+		$('#cautionText').text('Check End Times please');
+		return false;
+	}
+	if($('#endTime'+num).val() < $('#startTime'+num).val()){
+		if($('#endTime'+cnt).val() == '00:00'){
+			$('#cautionText').text('Check End Times please');
+		}
+		$('#cautionText').text('Check End Times please');
+		return false;
+	}
+	return true;
+}
+
 function lastTimeCheck(){
 	if($('#endTime'+cnt).val() < $('#startTime'+cnt).val()){
 		if($('#endTime'+cnt).val() == '00:00'){
-			alert("종료시간은 00:00이 마지막 시간입니다.")
+			alert("종료시간은 00:00이 되어여합니다.")
 			return false;
 		}
 	}
 	return true;
 }
 
-function feedbackCheck(){
+function saveCheck(){
 	console.log($('#endTime'+cnt).val());
 	if($('textarea[name="feedback"]').val() == ""){
 		$('#cautionText').text('하루평가를 작성해주세요.');
@@ -202,6 +238,11 @@ function feedbackCheck(){
 			return true;
 		}
 	}
+	if($('input').hasClass("incorrectTime")){
+		alert("시간설정이 적합하지 못하오니 다시한번 확인해주세요.");
+		return false;
+	}
+	
 	return true;
 }
 

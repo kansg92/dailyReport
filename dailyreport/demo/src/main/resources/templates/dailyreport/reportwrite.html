@@ -20,7 +20,7 @@
 			<i class="fas fa-table me-1"></i> Daily Report - Write
 		</div>
 		<div class="card-body">
-			<input type="date" name="day">
+			<input type="date" name="day"> <span id="cautionText"></span>
 			<form  id="daily-form">
 				<table id="datatable-dailyReportWrite" class="display">
 					<thead>
@@ -31,8 +31,8 @@
 					<tbody id="daily_tbody">
 						<tr>
 							<td class="hidden"><input value=0 name="id"> </td>
-							<td style="width:5%;"><input type = "text" name="start_time" id="startTime0" class="timepicker" value="00:00" ></td>
-							<td style="width:5%;"><input type = "text" name="end_time" id="endTime0" class="timepicker" value="00:15"></td>
+							<td style="width:5%;"><input name="start_time" id="startTime0" class="timepicker" value="00:00"  disabled></td>
+							<td style="width:5%;"><input name="end_time" id="endTime0" class="timepicker" value="00:15" ></td>
 							<td style="width:5%;" class="category">
 								<select name="catecode">
 									<option th:each="category : ${category}" th:value="${category.detail_code}" th:text="${category.name}"></option>
@@ -56,7 +56,6 @@
 		
 		<div id="buttonBox">
 		<button id="addBtn" type="button" class="btn btn-danger" >ADD</button>
-		<span id="cautionText"></span>
 		<button id="daily-saveBtn" class="btn btn-success" type="button" >SAVE</button>
 		</div>
 	</div>

@@ -50,8 +50,8 @@ public class ReportService implements Service<ReportVO, Integer> {
 		dao.delete(v);
 	}
 	
-	public ReportVO checkDate(String day) throws Exception{
-		return dao.checkDate(day);
+	public List<ReportVO> checkDate(String uid) throws Exception{
+		return dao.checkDate(uid);
 	}
 	
 	public List<ReportVO> getReportList(String id) throws Exception{

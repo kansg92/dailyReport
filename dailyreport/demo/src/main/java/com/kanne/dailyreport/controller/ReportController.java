@@ -57,6 +57,9 @@ public class ReportController {
 		List<ReportVO> reportList = null;
 		try {
 			reportList = reportService.getReportList(user.getId());
+			System.out.println(user.getId());
+			System.out.println(user);
+			System.out.println(reportList);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -85,9 +88,9 @@ public class ReportController {
 	
 	@RequestMapping("/dailyreport/reportModify")
 	public String reportModify(Model model,HttpSession session,int report_id,String day) {
-//		if(session.getAttribute("loginuser") == null) {
-//			return "401.html";
-//		}
+		if(session.getAttribute("loginuser") == null) {
+			return "401.html";
+		}
 		List<CommonCodeVO> cateList = null;
 		List<CommonCodeVO> immersion = null;
 		List<ReportDetailVO> detailList = null;

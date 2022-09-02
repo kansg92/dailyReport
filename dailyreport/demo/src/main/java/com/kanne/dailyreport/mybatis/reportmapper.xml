@@ -31,12 +31,12 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		WHERE id=#{id}
 	</delete>	
 	<select id="checkDate" parameterType="String" resultType="ReportVO">
-		SELECT * FROM report where day = #{day}
+		SELECT * FROM report where uid = #{uid}
 	</select>
 	<select id="getReportList" parameterType="String" resultType="ReportVO">
 		SELECT r.id, r.feedback, r.day, r.reg_date, r.up_date, r.del_date, r.uid, avg((immercode-1000)*2) AS score FROM report r
 			INNER JOIN reportdetail rd ON r.id = rd.report_id
-			WHERE uid = "test"
+			WHERE uid = #{uid}
 			GROUP BY r.id
 			ORDER BY day DESC
 	</select>

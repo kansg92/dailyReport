@@ -62,14 +62,20 @@ public class AjaxController {
 			HashMap<String, String> map = new HashMap<String, String>();
 			String key = "";
 			String value = "";
+			List<ReportVO> checkDate = reportService.checkDate(report.getUid());
+			// day 중복체크...
 			if(check.equals("save")) {
-				if(reportService.checkDate(report.getDay()) != null) {
-					return "dayoverwrite";
+				for (ReportVO obj : checkDate) {
+					if(obj.getDay() == report.getDay()) {
+						return "dayoverwrite";
+					}
 				}
 			}
-
+			
+			//리포트 인서트....
 			reportService.register(report);
 			
+			// 리포트 상세 인서트...
 			for(int i = 1; i < jsonarr.size()+1; i++) {
 				JSONObject jsonObj = (JSONObject) jsonarr.get(i-1);
 				key = jsonObj.get("name").toString();

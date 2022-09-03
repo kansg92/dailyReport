@@ -25,7 +25,7 @@
 				<table id="datatable-dailyReportWrite" class="display">
 					<thead>
 						<tr>
-							<th>시작시간</th><th>종료시간</th><th>항목</th><th>한 일</th><th>몰입도</th>
+							<th>시작시간</th><th>종료시간</th><th>항목</th><th>한 일</th><th>퀄리티</th><th>몰입도</th>
 						</tr>
 					</thead>
 					<tbody id="daily_tbody">
@@ -41,6 +41,11 @@
 							<td>
 								<input name="contents" type="text" id="contents0">
 							</td>
+							<td>
+								<select name="resultcode">
+									<option th:each="result : ${result}" th:value="${result.detail_code}" th:text="${result.name}"></option>
+								</select>
+							</td>							
 							<td>
 								<select name="immercode">
 									<option th:each="immersion : ${immersion}" th:value="${immersion.detail_code}" th:text="${immersion.name}"></option>

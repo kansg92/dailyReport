@@ -20,11 +20,13 @@ public class ReportDetailVO {
 	private String category;
 	private int immercode;
 	private String immersion;
+	private int resultcode;
+	private String result;	
 	private String reg_date;
 	private String up_date;
 	private String del_date;
 	private int report_id;
-	public ReportDetailVO(int id, String start_time, String end_time, String contents, int catecode, int immercode,
+	public ReportDetailVO(int id, String start_time, String end_time, String contents, int catecode, int immercode,int resultcode,
 			String reg_date) {
 		this.id = id;
 		this.start_time = start_time;
@@ -32,6 +34,7 @@ public class ReportDetailVO {
 		this.contents = contents;
 		this.catecode = catecode;
 		this.immercode = immercode;
+		this.resultcode = resultcode;
 		this.reg_date = reg_date;
 	}
 	public ReportDetailVO(String start_time, String end_time, int catecode, int immercode) {

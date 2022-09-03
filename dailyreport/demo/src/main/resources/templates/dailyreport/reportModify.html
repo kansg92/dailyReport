@@ -46,6 +46,15 @@
 								<input name="contents" type="text" id="contents0" th:value="${report.contents}">
 							</td>
 							<td>
+								<select name="resultcode">
+									<option th:if="${result.detail_code} == ${report.resultcode}" selected
+									 th:each="result : ${result}" th:value="${report.resultcode}" th:text="${report.result}"></option>
+									<option th:unless="${result.detail_code} == ${report.resultcode}"  
+									th:each="result : ${result}" th:value="${result.detail_code}" th:text="${result.name}"></option>
+									
+								</select>
+							</td>							
+							<td>
 								<select name="immercode">
 									<option th:if="${immersion.detail_code} == ${report.immercode}" selected
 									 th:each="immersion : ${immersion}" th:value="${report.immercode}" th:text="${report.immersion}"></option>

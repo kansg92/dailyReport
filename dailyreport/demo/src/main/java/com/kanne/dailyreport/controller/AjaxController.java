@@ -52,6 +52,17 @@ public class AjaxController {
 		
 		return immersion;
 	}
+	
+	@RequestMapping("/getresult")
+	public List<CommonCodeVO> getresult(){
+		List<CommonCodeVO> result = null;
+		try {
+			result = commonCode.getResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 	@RequestMapping("/dailyReportsubmit")
 	public String dailyReportsubmit(String jsonString, ReportVO report,String check) {
 		JSONParser parser = new JSONParser();
@@ -83,7 +94,7 @@ public class AjaxController {
 				System.out.println("i ::"+i+", key::"+key+", value::"+value);
 				map.put(jsonObj.get("name").toString(), jsonObj.get("value").toString());
 				
-				if(i % 6 == 0) {
+				if(i % 7 == 0) {
 					map.put("report_id", Integer.toString(report.getId()));
 					System.out.println("map::"+map);
 					reportDetailService.insertMap(map);

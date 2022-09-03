@@ -18,4 +18,5 @@ public interface CommonCodeDao {
 	public List<CommonCodeVO> selectAll() throws Exception;
 	public List<CommonCodeVO> selectCommonCode() throws Exception;
 	public List<CommonCodeVO> getimmersion() throws Exception;
+	public List<CommonCodeVO> getresult() throws Exception;
 }

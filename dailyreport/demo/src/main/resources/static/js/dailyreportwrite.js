@@ -92,6 +92,7 @@ function senddata(jsa,checking){
 	const id = $('input[name="reportId"]').val();
 	$.ajax({
 		url:'/dailyReportsubmit',
+		type: 'post',
 		data:{
 			//'data':sa,
 			'jsonString':jsa,
@@ -103,7 +104,8 @@ function senddata(jsa,checking){
 			},
 		success:function(data){
 			if(data == 'success'){
-				alert("저장되었습니다.");
+				alert("저장이 완료되었습니다.");
+				location.href="/dailyreport/dailyView"
 			}else if(data == 'dayoverwrite'){
 				alert("이미 등록되어있는 날짜입니다.");
 			}else if (data == "fail"){
@@ -144,6 +146,11 @@ function addRow (endTime,data){
 					'<input name="contents" type="text" id="contents'+cnt+'">'+
 					'</td>'+
 					'<td>'+
+						'<select name="resultcode" id="result'+cnt+'">'+
+						
+						'</select>'+
+					'</td>'+
+					'<td>'+
 						'<select name="immercode" id="immersion'+cnt+'">'+
 							
 						'</select>'+
@@ -161,6 +168,11 @@ function addCategory (data){
 		text='<option value="'+data[i].detail_code+'">'+data[i].name+'</option>';
 		$('#category'+cnt).append(text);
 	}
+	addImmersion();
+	addResult();
+}	
+
+function addImmersion(){
 	$.ajax({
 		url:'/getimmersion',
 		async: false,
@@ -171,7 +183,21 @@ function addCategory (data){
 			}
 		}
 	})
-}	
+}
+
+function addResult(){
+	$.ajax({
+		url:'/getresult',
+		async: false,
+		success:function(data){
+			for(i=0; i < data.length; i++){
+				var txt='<option value="'+data[i].detail_code+'">'+data[i].name+'</option>';
+				$('#result'+cnt).append(txt);
+			}
+		}
+	})	
+	
+}
 
 function checkvalidation(){
 	if($('#endTime'+cnt).val() === $('#startTime'+cnt).val() ){

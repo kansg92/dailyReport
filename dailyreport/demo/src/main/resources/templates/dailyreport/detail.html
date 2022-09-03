@@ -29,6 +29,7 @@
 							<th>종료시간</th>
 							<th>항목</th>
 							<th>한 일</th>
+							<th>퀄리티</th>
 							<th>몰입도</th>
 						</tr>
 					</thead>
@@ -38,6 +39,7 @@
 							<td th:text="${#strings.substring(report.end_time,0,5)}"></td>
 							<td th:text="${report.category}"></td>
 							<td th:text="${report.contents}"></td>
+							<td th:text="${report.result}"></td>
 							<td th:text="${report.immersion}"></td>
 						</tr>
 					</tbody>

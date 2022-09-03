@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kanne.dailyreport.common.Common;
 import com.kanne.dailyreport.service.CommonCodeService;
 import com.kanne.dailyreport.service.ReportDetailService;
 import com.kanne.dailyreport.service.ReportService;
@@ -27,6 +28,8 @@ public class ReportController {
 	@Autowired
 	ReportDetailService reportDetailService;
 	
+	Common common = new Common();
+	
 	@RequestMapping("/dailyreport/reportwrite")
 	public String reportWrite(Model model,HttpSession session) {
 		if(session.getAttribute("loginuser") == null) {
@@ -34,11 +37,14 @@ public class ReportController {
 		}
 		List<CommonCodeVO> cateList = null;
 		List<CommonCodeVO> immersion = null;
+		List<CommonCodeVO> result = null;
 		try {
 			cateList = commonCode.selectCommonCode();
 			immersion = commonCode.getImmersion();
+			result = commonCode.getResult();
 			model.addAttribute("category",cateList);
 			model.addAttribute("immersion",immersion);
+			model.addAttribute("result",result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -57,9 +63,6 @@ public class ReportController {
 		List<ReportVO> reportList = null;
 		try {
 			reportList = reportService.getReportList(user.getId());
-			System.out.println(user.getId());
-			System.out.println(user);
-			System.out.println(reportList);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -93,11 +96,13 @@ public class ReportController {
 		}
 		List<CommonCodeVO> cateList = null;
 		List<CommonCodeVO> immersion = null;
+		List<CommonCodeVO> result = null;		
 		List<ReportDetailVO> detailList = null;
 		ReportVO report = null;
 		try {
 			cateList = commonCode.selectCommonCode();
 			immersion = commonCode.getImmersion();
+			result = commonCode.getResult();
 			detailList = reportDetailService.getDetail(report_id);
 			report = reportService.get(report_id);
 
@@ -106,12 +111,14 @@ public class ReportController {
 		}
 		model.addAttribute("selectedReport",report);
 		model.addAttribute("detailList",detailList);		
+		model.addAttribute("result",result);
 		model.addAttribute("category",cateList);
 		model.addAttribute("immersion",immersion);		
 		model.addAttribute("left","/left");
 		model.addAttribute("center","/dailyreport/reportModify");
 		return "/index";
 	}
+	
 	
 	
 }

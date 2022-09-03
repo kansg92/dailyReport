@@ -57,5 +57,9 @@ public class CommonCodeService implements Service<CommonCodeVO, Integer> {
 	public List<CommonCodeVO> getImmersion() throws Exception{
 		return dao.getimmersion();
 	}
+	
+	public List<CommonCodeVO> getResult() throws Exception{
+		return dao.getresult();
+	}
 
 }

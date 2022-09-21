@@ -19,20 +19,20 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<insert id="insertMap" parameterType="Map">
 		INSERT INTO reportdetail VALUES (
 		<if test="id == 0">
-		null,
+			null,
 		</if>
 		<if test="id != 0">
-		#{id},
+			#{id},
 		</if>
 		#{start_time},#{end_time},#{contents},#{catecode},#{immercode},#{resultcode},#{report_id},SYSDATE(),null,null)
-		ON DUPLICATE KEY UPDATE start_time = #{start_time},
-								end_time = #{end_time},
-								contents = #{contents},
-								catecode = #{catecode},
-								immercode = #{immercode},
-								resultcode = #{resultcode},
-					        	up_date = #{up_date}
-		
+		ON DUPLICATE KEY UPDATE 
+			start_time = #{start_time},
+			end_time = #{end_time},
+			contents = #{contents},
+			catecode = #{catecode},
+			immercode = #{immercode},
+			resultcode = #{resultcode},
+        	up_date = #{up_date}
 	</insert>
 	<update id="update" parameterType="ReportDetailVO">
 		UPDATE reportdetail 
@@ -50,14 +50,54 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		WHERE id=#{id}
 	</delete>	
 	<select id="getDetail" parameterType="int" resultType="ReportDetailVO">
-		select rd.id, rd.start_time, rd.end_time, rd.contents, rd.catecode, code.name AS category, rd.immercode, code2.name AS immersion, 
+		SELECT rd.id, rd.start_time, rd.end_time, rd.contents, rd.catecode, code.name AS category, rd.immercode, code2.name AS immersion, 
 			rd.resultcode,code3.name AS result, rd.report_id, rd.reg_date, rd.up_date, rd.del_date 
-			from reportdetail rd
+		FROM reportdetail rd
 			INNER JOIN commoncode code ON rd.catecode = code.detail_code
 			INNER JOIN commoncode code2 ON rd.immercode = code2.detail_code
 			INNER JOIN commoncode code3 ON rd.resultcode = code3.detail_code
-			WHERE rd.report_id = #{report_id} 
-			ORDER BY rd.start_time
+		WHERE rd.report_id = #{report_id} 
+		ORDER BY rd.start_time
+	</select>
+	
+	<select id="getSpecifiedTable" parameterType="map" resultType="ReportDetailVO">
+		SELECT rd.id, code.name AS category,
+			SUM(if(TIMESTAMPDIFF(minute, rd.start_time ,rd.end_time) > 0,
+				TIMESTAMPDIFF(minute, rd.start_time ,rd.end_time),
+				TIMESTAMPDIFF(minute, rd.start_time ,rd.end_time)+1440)) as spendtime,
+			ROUND(
+				SUM((rd.immercode-1000) * IF(TIMESTAMPDIFF(minute, rd.start_time ,rd.end_time) > 0,
+				TIMESTAMPDIFF(minute, rd.start_time ,rd.end_time),
+				TIMESTAMPDIFF(minute, rd.start_time ,rd.end_time)+1440)/1440) +
+				SUM((rd.resultcode-100) * IF(TIMESTAMPDIFF(minute, rd.start_time ,rd.end_time) > 0,
+				TIMESTAMPDIFF(minute, rd.start_time ,rd.end_time),
+				TIMESTAMPDIFF(minute, rd.start_time ,rd.end_time)+1440)/1440) )        
+		        AS score,
+		   	ROUND(     
+		        SUM((rd.resultcode-100) * IF(TIMESTAMPDIFF(minute, rd.start_time ,rd.end_time) > 0,
+				TIMESTAMPDIFF(minute, rd.start_time ,rd.end_time),
+				TIMESTAMPDIFF(minute, rd.start_time ,rd.end_time)+1440)/1440)) 
+				AS qscore
+		FROM reportdetail rd
+			INNER JOIN report r ON r.id = rd.report_id 
+			AND r.uid = #{uid}
+		    AND r.day = #{day}
+		    RIGHT OUTER JOIN commoncode code ON code.detail_code = rd.catecode 
+		WHERE code.detail_code % 100  
+		AND code.detail_code > 2100
+		GROUP BY code.detail_code;
+	</select>
+	
+	<select id="getqscore" parameterType="map" resultType="int">
+		SELECT 
+			ROUND(SUM((rd.resultcode-100) * IF(TIMESTAMPDIFF(minute, rd.start_time ,rd.end_time) > 0,
+				TIMESTAMPDIFF(minute, rd.start_time ,rd.end_time),
+				TIMESTAMPDIFF(minute, rd.start_time ,rd.end_time)+1440)/1440))     
+		        AS qscore
+		FROM report r
+			INNER JOIN reportdetail rd ON r.id = rd.report_id 
+		WHERE uid = #{uid}
+		AND r.day = #{day}	
 	</select>
 
 </mapper>

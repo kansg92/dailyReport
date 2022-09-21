@@ -26,6 +26,10 @@ public class ReportDetailVO {
 	private String up_date;
 	private String del_date;
 	private int report_id;
+	private String spendtime;
+	private int score;
+	private int qscore;
+	
 	public ReportDetailVO(int id, String start_time, String end_time, String contents, int catecode, int immercode,int resultcode,
 			String reg_date) {
 		this.id = id;

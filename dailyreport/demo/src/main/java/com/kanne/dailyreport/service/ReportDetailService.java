@@ -52,4 +52,14 @@ public class ReportDetailService implements Service<ReportDetailVO, Integer> {
 	public List<ReportDetailVO> getDetail(int report_id) throws Exception {
 		return dao.getDetail(report_id);
 	}
+	
+	public List<ReportDetailVO> getSpecifiedTable(HashMap<String, String> map) throws Exception {
+		
+		return dao.getSpecifiedTable(map);
+	}
+	
+	public int getqscore(HashMap<String, String> map) throws Exception {
+		
+		return dao.getqscore(map);
+	}
 }

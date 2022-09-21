@@ -1,8 +1,10 @@
 package com.kanne.dailyreport.controller;
 
+import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -110,6 +112,53 @@ public class AjaxController {
 		}
 		
 		return "success";
+	}
+	
+	@RequestMapping("getDailyChart")
+	public JSONArray getDailyChart(String day, String uid) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("day", day);
+		map.put("uid", uid);
+		JSONArray jsonArray = new JSONArray();
+		List<ReportDetailVO> reportList = null;
+		
+		try {
+			reportList = reportDetailService.getSpecifiedTable(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		for (ReportDetailVO chart : reportList) {
+			JSONArray daily = new JSONArray();
+			daily.add(chart.getCategory());
+			if(chart.getSpendtime() == null) {
+				daily.add(0);
+			}else {
+				daily.add(Integer.parseInt(chart.getSpendtime()) );
+			}
+			jsonArray.add(daily);
+		}
+		
+		
+		return jsonArray;
+	}
+	
+	@RequestMapping("changeDailyChart")
+	public List<ReportDetailVO> changeDailyChart(String day, String uid) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("day", day);
+		map.put("uid", uid);
+		List<ReportDetailVO> reportList = null;
+		int qscore = 0;
+		try {
+			reportList = reportDetailService.getSpecifiedTable(map);
+			qscore = reportDetailService.getqscore(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return reportList;
+		
 	}
 	
 }

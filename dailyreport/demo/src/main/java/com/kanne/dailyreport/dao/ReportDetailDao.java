@@ -20,4 +20,6 @@ public interface ReportDetailDao {
 	
 	public void insertMap(HashMap<String, String> map) throws Exception;
 	public List<ReportDetailVO> getDetail(int report_id) throws Exception;
+	public List<ReportDetailVO> getSpecifiedTable(HashMap<String, String> map) throws Exception;
+	public int getqscore(HashMap<String, String> map) throws Exception;
 }

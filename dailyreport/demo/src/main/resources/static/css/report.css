@@ -31,3 +31,14 @@ input[name="contents"]{
 #cautionText{
 	color: red;
 }
+
+.chart-screen{
+    display: flex;
+    flex-direction: column;
+}
+
+.chart-body{
+	display:flex;
+	align-items: center;
+}
+

@@ -103,12 +103,10 @@ function paintingChart(data){
 	        }
 	    },
 	    title: {
-	        text: 'Global smartphone shipments market share, Q1 2022'
+	        text: $('input[name="day"]').val()
 	    },
 	    subtitle: {
-	        text: 'Source: ' +
-	            '<a href="https://www.counterpointresearch.com/global-smartphone-share/"' +
-	            'target="_blank">Counterpoint Research</a>'
+	        text: '분류 종합 테이블 차트' 
 	    },
 	    accessibility: {
 	        point: {

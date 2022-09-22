@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM habitcard 
 	</select>
 	<select id="getHabitList" parameterType="String" resultType="HabitCardVO">
-		SELECT hc.id,hc.num,hc.habit,hc.statuscode,c1.name AS status,hc.valueCode,c2.name AS value,hc.reg_date,hc.up_date FROM habitcard hc
+		SELECT hc.id,hc.habit,hc.statuscode,c1.name AS status,hc.valueCode,c2.name AS value,hc.reg_date,hc.up_date FROM habitcard hc
 			INNER JOIN commoncode c1 ON c1.detail_code = hc.statusCode
 			INNER JOIN commoncode c2 ON c2.detail_code = hc.valueCode
  		WHERE hc.uid = #{uid}
@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="insert" parameterType="HabitCardVO">
-		INSERT INTO habitcard VALUES (NULL,#{num},#{habit},2,#{valueCode},SYSDATE(),null,#{uid})
+		INSERT INTO habitcard VALUES (NULL,#{habit},2,#{valueCode},SYSDATE(),null,#{uid})
 	</insert>
 	<update id="update" parameterType="HabitCardVO">
 		UPDATE habitcard 

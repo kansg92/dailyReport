@@ -7,7 +7,6 @@ function changeHabit(event){
 
 $(document).ready(function(){
 	$('#habitAddBtn').click(function(){
-		let num = document.getElementsByClassName("habitNum").length+1;
 		let habit = $('input[name="habit"]').val();
 		let valueCode = $('select[name="valueCode"]').val();
 		let uid = $('#uidtxt').text();
@@ -15,7 +14,6 @@ $(document).ready(function(){
 		$.ajax({
 			url:"addHabitCard",
 			data:{
-				num:num,
 				habit:habit,
 				valueCode: valueCode,
 				uid : uid

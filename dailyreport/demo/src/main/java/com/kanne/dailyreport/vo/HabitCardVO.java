@@ -14,7 +14,6 @@ import lombok.ToString;
 public class HabitCardVO {
 
 	private int id;
-	private int num;
 	private String habit;
 	private int statusCode;
 	private String status;

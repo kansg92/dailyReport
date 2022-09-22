@@ -19,8 +19,6 @@ public class HabitController {
 	
 	@RequestMapping("addHabitCard")
 	public Object addHabitCard(HabitCardVO habitcard,HabitVO habit) {
-		System.out.println(habitcard);
-		System.out.println(habit);
 		try {
 			habitService.register(habit);
 			habitcardService.register(habitcard);

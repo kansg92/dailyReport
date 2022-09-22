@@ -1,6 +1,7 @@
 .plusHabitCard:hover{
 	cursor: pointer;
-	border-color:green;
+	border: 3px solid green;
+	font-size: 1.5em;
 }
 
 .inputHabit{
@@ -8,4 +9,13 @@
 	height : 55px;
 	font-size: 20px;
 		
+}
+
+.delIcon{
+	float:right;
+	font-size: 2em;
+}
+
+.delIcon:hover{
+	cursor: pointer;
 }

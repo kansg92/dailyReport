@@ -29,8 +29,6 @@ public class MainController {
 			UserVO loginuser = (UserVO) session.getAttribute("loginuser");
 			try {
 				habitList = habitCardService.getHabitList(loginuser.getId());
-				System.out.println(loginuser.getId());
-				System.out.println(habitList);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

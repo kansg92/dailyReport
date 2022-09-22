@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	
+<mapper namespace="com.kanne.dailyreport.dao.HabitCardDao">
+	
+	<select id="select" parameterType="String" resultType="HabitCardVO">
+		SELECT * FROM habitcard WHERE reg_date=#{reg_date}
+	</select>
+	<select id="selectAll" resultType="HabitCardVO">
+		SELECT * FROM habitcard 
+	</select>
+	<select id="getHabitList" parameterType="String" resultType="HabitCardVO">
+		SELECT hc.id,hc.num,hc.habit,hc.statuscode,c1.name AS status,hc.valueCode,c2.name AS value,hc.reg_date,hc.up_date FROM habitcard hc
+			INNER JOIN commoncode c1 ON c1.detail_code = hc.statusCode
+			INNER JOIN commoncode c2 ON c2.detail_code = hc.valueCode
+ 		WHERE hc.uid = #{uid}
+ 		ORDER BY hc.num 
+	</select>
+	
+	<insert id="insert" parameterType="HabitCardVO">
+		INSERT INTO habitcard VALUES (NULL,#{num},#{habit},2,#{valueCode},SYSDATE(),null,#{uid})
+	</insert>
+	<update id="update" parameterType="HabitCardVO">
+		UPDATE habitcard 
+		SET up_date = SYSDATE(),
+		WHERE id=#{id}			
+	</update>
+	<delete id="delete" parameterType="int">
+		DELETE FROM habitcard 
+		WHERE id=#{id}
+	</delete>	
+
+
+
+</mapper>
+
+
+
+
+
+

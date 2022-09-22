@@ -8,7 +8,8 @@ import com.kanne.dailyreport.dao.HabitDao;
 import com.kanne.dailyreport.frame.Service;
 import com.kanne.dailyreport.vo.HabitVO;
 
-public class HabitService implements Service<HabitVO, Integer> {
+@org.springframework.stereotype.Service
+public class HabitService implements Service<HabitVO, String> {
 
 	@Autowired
 	HabitDao dao;
@@ -24,7 +25,7 @@ public class HabitService implements Service<HabitVO, Integer> {
 	}
 
 	@Override
-	public void trueRemove(Integer k) throws Exception {
+	public void trueRemove(String k) throws Exception {
 		dao.delete(k);
 	}
 
@@ -35,7 +36,7 @@ public class HabitService implements Service<HabitVO, Integer> {
 	}
 
 	@Override
-	public HabitVO get(Integer k) throws Exception {
+	public HabitVO get(String k) throws Exception {
 		return dao.select(k);
 	}
 

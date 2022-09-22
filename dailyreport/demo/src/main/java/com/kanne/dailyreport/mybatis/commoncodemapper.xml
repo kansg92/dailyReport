@@ -40,11 +40,11 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 			up_date = SYSDATE()
 		WHERE detail_code=#{detail_code}			
 	</update>
-	<delete id="delete" parameterType="CommonCodeVO">
+	<update id="delete" parameterType="CommonCodeVO">
 		UPDATE commoncode 
 		SET del_date = SYSDATE()
 		WHERE detail_code=#{detail_code}
-	</delete>	
+	</update>	
 	
 	
 

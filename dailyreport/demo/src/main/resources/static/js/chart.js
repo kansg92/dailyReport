@@ -1,6 +1,5 @@
 
 $(document).ready(function() {
-
 	
 	$('input[name="day"]').change(function(){
 		var day = $(this).val()
@@ -12,6 +11,7 @@ $(document).ready(function() {
 				"uid" : uid 
 			},
 			success: function(data){
+				$('#daily_tbody').empty();
 				addRow(data);
 				getData()
 			}
@@ -74,6 +74,7 @@ function sumScore(){
 function addRow(data){
 	var cnt = 0;
 	var qscore = 0; 
+	var txt2 = '<tr><td>총 점수</td><td colspan="3" id="sumScore">0</td></tr><tr><td>퀄리티 등급</td><td colspan="3" id="quality">0</td></tr>	'
 	for(i=13; i >= 0;i--){
 		qscore += data[i].qscore;
 		if(data[i].spendtime == null){
@@ -84,8 +85,9 @@ function addRow(data){
 				'<td id="score'+cnt+'">'+data[i].score+'</td></tr>';
 		cnt++;
 		$('#daily_tbody').prepend(txt);	
-		
 	}
+	$('#daily_tbody').append(txt2);
+	
 	$('#quality').text(qscore)
 	sumScore();	
 	qscoreToQuailty();			

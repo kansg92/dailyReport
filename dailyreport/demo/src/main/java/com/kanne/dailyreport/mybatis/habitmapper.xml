@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	
+<mapper namespace="com.kanne.dailyreport.dao.HabitDao">
+	
+	<select id="select" parameterType="String" resultType="HabitVO">
+		SELECT * FROM habit WHERE reg_date=#{reg_date}
+	</select>
+	<select id="selectAll" resultType="HabitVO">
+		SELECT * FROM habit 
+	</select>
+	<insert id="insert" parameterType="HabitVO">
+		INSERT INTO habit VALUES (SYSDATE(),NULL,NULL,#{uid})
+		ON DUPLICATE KEY UPDATE uid=#{uid}
+	</insert>
+	<update id="update" parameterType="HabitVO">
+		UPDATE habit 
+		SET up_date = SYSDATE(),
+		WHERE id=#{id}			
+	</update>
+	<delete id="delete" parameterType="int">
+		DELETE FROM habit 
+		WHERE id=#{id}
+	</delete>	
+
+
+
+</mapper>
+
+
+
+
+
+

@@ -1,5 +1,7 @@
 package com.kanne.dailyreport.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kanne.dailyreport.service.HabitCardService;
 import com.kanne.dailyreport.service.UserService;
+import com.kanne.dailyreport.vo.HabitCardVO;
 import com.kanne.dailyreport.vo.UserVO;
 
 @Controller
@@ -15,10 +19,24 @@ public class MainController {
 	
 	@Autowired
 	UserService userService;
+	@Autowired
+	HabitCardService habitCardService;
 	
 	@RequestMapping("/")
 	public String main(Model model,HttpSession session) {
+		List<HabitCardVO> habitList = null;
+		if(session.getAttribute("loginuser") != null) {
+			UserVO loginuser = (UserVO) session.getAttribute("loginuser");
+			try {
+				habitList = habitCardService.getHabitList(loginuser.getId());
+				System.out.println(loginuser.getId());
+				System.out.println(habitList);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
+		model.addAttribute("habitlist",habitList);
 		model.addAttribute("left","left");
 		return "index";
 	}

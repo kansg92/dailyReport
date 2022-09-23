@@ -18,4 +18,5 @@
 
 .delIcon:hover{
 	cursor: pointer;
+	font-weight: bold;
 }

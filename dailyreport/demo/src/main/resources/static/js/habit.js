@@ -60,13 +60,15 @@ function addHabitCard(data){
 
 
 function deleteCard(id){
-	console.log(id);
-	$.ajax({
+	if(window.confirm("해당 습관을 삭제하시겠습니까?")){
+		$.ajax({
 		url:"deleteHabitCard",
 		data:{"id":id},
-		success:function(data){
+		success:function(){
 			$('#habitCard'+id).remove();
 		}
 	})
+	}
+
 	
 }

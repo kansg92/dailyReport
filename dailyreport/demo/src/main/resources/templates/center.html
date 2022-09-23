@@ -10,9 +10,12 @@
 				<div class="card-body" th:id="'habit'+${habitlistStat.count}"><span th:text="${habitlist.habit}"></span><i class="bi bi-x delIcon" th:onClick="deleteCard([[${habitlist.id}]])"></i></div>
 				<div
 					class="card-footer d-flex align-items-center justify-content-between">
-					<span class="small text-white" >완료</span>
+					<span class="small text-white" th:text="${habitlist.status}" th:id="'habitCheck'+${habitlist.id}">완료</span>
 					<div class="small text-white">
-						<input type="checkbox">
+						<input name="statusCode" type="checkbox" th:onClick="habitCheck([[${habitlist.id}]],event)"
+						th:if="${habitlist.statusCode} == 1" checked>
+						<input name="statusCode" type="checkbox" th:onClick="habitCheck([[${habitlist.id}]],event)"
+						th:unless="${habitlist.statusCode} == 1" >						
 					</div>
 				</div>
 			</div>
@@ -20,9 +23,12 @@
 				<div class="card-body" th:id="'habit'+${habitlistStat.count}"><span th:text="${habitlist.habit}"></span> <i class="bi bi-x delIcon" th:onClick="deleteCard([[${habitlist.id}]])"></i></div>
 				<div
 					class="card-footer d-flex align-items-center justify-content-between">
-					<span class="small text-white" >완료</span>
+					<span class="small text-white" th:text="${habitlist.status}" th:id="'habitCheck'+${habitlist.id}">완료</span>
 					<div class="small text-white">
-						<input type="checkbox">
+						<input name="statusCode" type="checkbox" th:onClick="habitCheck([[${habitlist.id}]],event)"
+						th:if="${habitlist.statusCode} == 1" checked>
+						<input name="statusCode" type="checkbox" th:onClick="habitCheck([[${habitlist.id}]],event)"
+						th:unless="${habitlist.statusCode} == 1" >
 					</div>
 				</div>
 			</div>			

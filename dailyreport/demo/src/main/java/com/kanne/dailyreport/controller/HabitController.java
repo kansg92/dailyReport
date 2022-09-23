@@ -41,4 +41,16 @@ public class HabitController {
 		
 	}
 	
+	@RequestMapping("updateStatus")
+	public void updateStatus(int id, int statusCode) {
+		System.out.println(id);
+		System.out.println(statusCode);
+		try {
+			habitcardService.updateStatus(id, statusCode);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 }

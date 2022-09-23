@@ -13,12 +13,18 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM habitcard 
 	</select>
 	<select id="getHabitList" parameterType="String" resultType="HabitCardVO">
-		SELECT hc.id,hc.habit,hc.statuscode,c1.name AS status,hc.valueCode,c2.name AS value,hc.reg_date,hc.up_date FROM habitcard hc
+		SELECT hc.id,hc.habit,hc.statuscode,c1.name AS status,hc.valueCode,c2.name AS value,hc.reg_date,hc.up_date,hc.uid FROM habitcard hc
 			INNER JOIN commoncode c1 ON c1.detail_code = hc.statusCode
 			INNER JOIN commoncode c2 ON c2.detail_code = hc.valueCode
  		WHERE hc.uid = #{uid}
+ 		AND hc.reg_date = #{reg_date}
 	</select>
-	
+	<select id="getHabitList2" parameterType="String" resultType="HabitCardVO">
+		SELECT hc.id,hc.habit,hc.statuscode,c1.name AS status,hc.valueCode,c2.name AS value,hc.reg_date,hc.up_date,hc.uid FROM habitcard hc
+			INNER JOIN commoncode c1 ON c1.detail_code = hc.statusCode
+			INNER JOIN commoncode c2 ON c2.detail_code = hc.valueCode
+ 		WHERE hc.reg_date = #{reg_date}
+	</select>	
 	<insert id="insert" parameterType="HabitCardVO" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO habitcard VALUES (NULL,#{habit},2,#{valueCode},SYSDATE(),null,#{uid})
 	</insert>
@@ -31,7 +37,11 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		DELETE FROM habitcard 
 		WHERE id=#{id}
 	</delete>	
-
+	<update id="updateStatus" parameterType="int">
+		UPDATE habitcard 
+		SET statusCode = ${statusCode}
+		WHERE id=#{id}			
+	</update>
 
 
 </mapper>

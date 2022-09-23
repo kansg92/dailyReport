@@ -1,5 +1,7 @@
 package com.kanne.dailyreport.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -25,10 +27,12 @@ public class MainController {
 	@RequestMapping("/")
 	public String main(Model model,HttpSession session) {
 		List<HabitCardVO> habitList = null;
+		SimpleDateFormat  formatter = new SimpleDateFormat("yyyy-MM-dd");  
+		String today = formatter.format(new Date());
 		if(session.getAttribute("loginuser") != null) {
 			UserVO loginuser = (UserVO) session.getAttribute("loginuser");
 			try {
-				habitList = habitCardService.getHabitList(loginuser.getId());
+				habitList = habitCardService.getHabitList(loginuser.getId(),today);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

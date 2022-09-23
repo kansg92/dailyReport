@@ -47,8 +47,16 @@ public class HabitCardService implements Service<HabitCardVO, Integer> {
 		return dao.selectAll();
 	}
 	
-	public List<HabitCardVO> getHabitList(String uid) throws Exception {
-		return dao.getHabitList(uid);
+	public List<HabitCardVO> getHabitList(String uid,String reg_date) throws Exception {
+		return dao.getHabitList(uid,reg_date);
 	}
-
+	
+	public List<HabitCardVO> getHabitList2(String reg_date) throws Exception {
+		return dao.getHabitList2(reg_date);
+	}
+	
+	public void updateStatus(int id, int statusCode) throws Exception {
+		dao.updateStatus(id, statusCode);
+	}
+	
 }

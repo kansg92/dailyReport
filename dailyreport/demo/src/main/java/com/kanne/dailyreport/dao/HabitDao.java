@@ -12,7 +12,7 @@ import com.kanne.dailyreport.vo.HabitVO;
 public interface HabitDao {
 	public void insert(HabitVO obj) throws Exception;
 	public void update(HabitVO obj) throws Exception;
-	public void delete(String id) throws Exception;
+	public void delete(Integer id) throws Exception;
 	public HabitVO select(String id) throws Exception;
 	public List<HabitVO> selectAll() throws Exception;
 	

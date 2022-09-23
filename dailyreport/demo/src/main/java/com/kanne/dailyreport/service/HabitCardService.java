@@ -26,8 +26,8 @@ public class HabitCardService implements Service<HabitCardVO, Integer> {
 	}
 
 	@Override
-	public void trueRemove(Integer k) throws Exception {
-		dao.delete(k);
+	public void trueRemove(Integer id) throws Exception {
+		dao.delete(id);
 		
 	}
 

@@ -30,4 +30,15 @@ public class HabitController {
 		
 	}
 	
+	@RequestMapping("deleteHabitCard")
+	public void deleteHabitCard(Integer id) {
+		System.out.println(id);
+		try {
+			habitcardService.trueRemove(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 }

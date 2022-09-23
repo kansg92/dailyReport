@@ -17,10 +17,9 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 			INNER JOIN commoncode c1 ON c1.detail_code = hc.statusCode
 			INNER JOIN commoncode c2 ON c2.detail_code = hc.valueCode
  		WHERE hc.uid = #{uid}
- 		ORDER BY hc.num 
 	</select>
 	
-	<insert id="insert" parameterType="HabitCardVO">
+	<insert id="insert" parameterType="HabitCardVO" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO habitcard VALUES (NULL,#{habit},2,#{valueCode},SYSDATE(),null,#{uid})
 	</insert>
 	<update id="update" parameterType="HabitCardVO">

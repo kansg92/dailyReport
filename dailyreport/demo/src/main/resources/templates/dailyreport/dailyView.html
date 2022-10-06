@@ -28,7 +28,7 @@
 						</tr>
 					</thead>
 					<tbody id="daily_tbody">
-						<tr th:each="report : ${report}" th:onClick="goDetailView([[${report.id}]])">
+						<tr th:if="${report} != null" th:each="report : ${report}"  th:onClick="goDetailView([[${report.id}]])">
 							<td th:text="${report.day}"></td>
 							<td th:text="${report.reg_date}"></td>
 							<td th:text="${report.up_date}"></td>

@@ -32,7 +32,6 @@ public class HabitController {
 	
 	@RequestMapping("deleteHabitCard")
 	public void deleteHabitCard(Integer id) {
-		System.out.println(id);
 		try {
 			habitcardService.trueRemove(id);
 		} catch (Exception e) {
@@ -43,8 +42,6 @@ public class HabitController {
 	
 	@RequestMapping("updateStatus")
 	public void updateStatus(int id, int statusCode) {
-		System.out.println(id);
-		System.out.println(statusCode);
 		try {
 			habitcardService.updateStatus(id, statusCode);
 		} catch (Exception e) {
@@ -52,5 +49,17 @@ public class HabitController {
 		}
 		
 	}
+	
+	@RequestMapping("modifyHabit")
+	public void modifyHabit(HabitCardVO habit) {
+		System.out.println(habit);
+		try {
+			habitcardService.modify(habit);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 	
 }

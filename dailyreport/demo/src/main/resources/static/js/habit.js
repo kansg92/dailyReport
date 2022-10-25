@@ -37,7 +37,9 @@ function addHabitCard(data){
 		var txt = 
 			'<div class="col-xl-6 col-md-6 habitNum" id="habitCard'+data.id+'">'+
 			'<div class="card bg-success text-white mb-4">'+
-			'<div class="card-body" id="habit"'+data.num+'>'+data.habit+'<i class="bi bi-x delIcon" onClick="deleteCard('+data.id+')"></i></div>'+
+			'<div class="card-body" id="habit"'+data.num+'><span class="habitTxt" id="habitTxt'+data.id+'" ondblclick="modifyHabit('+data.id+')">'+data.habit+'</span>'+
+			'<input id="habitInput'+data.id+'" value="'+data.habit+'" class="hidden habitInput">'+
+			'<i class="bi bi-x delIcon" onClick="deleteCard('+data.id+')"></i></div>'+
 			'<div class="card-footer d-flex align-items-center justify-content-between">'+
 			'<span class="small text-white" id="habitCheck'+data.id+'">실패</span>'+
 			'<div class="small text-white">'+
@@ -47,7 +49,9 @@ function addHabitCard(data){
 		var txt = 
 			'<div class="col-xl-6 col-md-6 habitNum" id="habitCard'+data.id+'">'+
 			'<div class="card bg-danger text-white mb-4">'+
-			'<div class="card-body" id="habit"'+data.num+'>'+data.habit+'<i class="bi bi-x delIcon" onClick="deleteCard('+data.id+')"></i></div>'+
+			'<div class="card-body" id="habit"'+data.num+'><span class="habitTxt" id="habitTxt'+data.id+'" ondblclick="modifyHabit('+data.id+')">'+data.habit+'</span>'+
+			'<input id="habitInput'+data.id+'" value="'+data.habit+'" class="hidden habitInput">'+
+			'<i class="bi bi-x delIcon" onClick="deleteCard('+data.id+')"></i></div>'+
 			'<div class="card-footer d-flex align-items-center justify-content-between">'+
 			'<span class="small text-white" id="habitCheck'+data.id+'">실패</span>'+
 			'<div class="small text-white">'+
@@ -100,6 +104,29 @@ function habitCheck(id,event){
 }
 
 
+function modifyHabit(id){
+	$("#habitInput"+id).removeClass("hidden");
+	$("#habitTxt"+id).addClass("hidden");
+	
+	$("#habitInput"+id).keyup(function(){
+		if(window.event.keyCode==13){
+			$.ajax({
+				url:"modifyHabit",
+				data:{
+					habit : $("#habitInput"+id).val(),
+					id : id
+				},
+				success : function() {
+					$("#habitTxt"+id).text($("#habitInput"+id).val());
+					$("#habitInput"+id).addClass("hidden");
+					$("#habitTxt"+id).removeClass("hidden");
+				}
+			})
+
+			 
+		}
+	})
+}
 
 
 

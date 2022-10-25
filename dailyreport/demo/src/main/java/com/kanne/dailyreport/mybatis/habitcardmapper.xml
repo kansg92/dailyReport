@@ -31,7 +31,8 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<update id="update" parameterType="HabitCardVO">
 		UPDATE habitcard 
 		SET up_date = SYSDATE(),
-		WHERE id=#{id}			
+			habit = #{habit}
+		WHERE id = #{id}			
 	</update>
 	<delete id="delete" parameterType="int">
 		DELETE FROM habitcard 

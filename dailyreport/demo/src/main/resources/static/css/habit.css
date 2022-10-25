@@ -20,3 +20,12 @@
 	cursor: pointer;
 	font-weight: bold;
 }
+
+.habitTxt:hover{
+	cursor:pointer;
+}
+
+.habitInput{
+	color:black !important;
+	width:100%;
+}

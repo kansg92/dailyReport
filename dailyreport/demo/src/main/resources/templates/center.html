@@ -7,7 +7,10 @@
 	<div class="row">
 		<div class="col-xl-6 col-md-6 habitNum" th:each="habitlist : ${habitlist}" th:id="'habitCard'+${habitlist.id}">
 			<div th:if="${habitlist.valueCode} == 3" class="card bg-success text-white mb-4">
-				<div class="card-body" th:id="'habit'+${habitlistStat.count}"><span th:text="${habitlist.habit}"></span><i class="bi bi-x delIcon" th:onClick="deleteCard([[${habitlist.id}]])"></i></div>
+				<div class="card-body" th:id="'habit'+${habitlistStat.count}"><span class="habitTxt" th:id="'habitTxt'+${habitlist.id}" th:ondblClick="modifyHabit([[${habitlist.id}]])" th:text="${habitlist.habit}"></span>
+					<input th:id="'habitInput'+${habitlist.id}" th:value="${habitlist.habit}" class="hidden habitInput">
+					<i class="bi bi-x delIcon" th:onClick="deleteCard([[${habitlist.id}]])"></i>
+				</div>
 				<div
 					class="card-footer d-flex align-items-center justify-content-between">
 					<span class="small text-white" th:text="${habitlist.status}" th:id="'habitCheck'+${habitlist.id}">완료</span>
@@ -20,7 +23,10 @@
 				</div>
 			</div>
 			<div th:if="${habitlist.valueCode} == 4" class="card bg-danger text-white mb-4">
-				<div class="card-body" th:id="'habit'+${habitlistStat.count}"><span th:text="${habitlist.habit}"></span> <i class="bi bi-x delIcon" th:onClick="deleteCard([[${habitlist.id}]])"></i></div>
+				<div class="card-body" th:id="'habit'+${habitlistStat.count}"><span class="habitTxt" th:id="'habitTxt'+${habitlist.id}" th:ondblClick="modifyHabit([[${habitlist.id}]])" th:text="${habitlist.habit}"></span>
+					<input th:id="'habitInput'+${habitlist.id}" th:value="${habitlist.habit}" class="hidden habitInput">
+					<i class="bi bi-x delIcon" th:onClick="deleteCard([[${habitlist.id}]])"></i>
+				</div>
 				<div
 					class="card-footer d-flex align-items-center justify-content-between">
 					<span class="small text-white" th:text="${habitlist.status}" th:id="'habitCheck'+${habitlist.id}">완료</span>

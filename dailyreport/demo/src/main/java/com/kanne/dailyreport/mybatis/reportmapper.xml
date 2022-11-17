@@ -35,17 +35,19 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</select>
 	<select id="getReportList" parameterType="String" resultType="ReportVO">
 		SELECT r.id,r.day,r.reg_date,r.up_date,
-			sum((rd.immercode-1000) * IF(TIMESTAMPDIFF(minute, rd.start_time ,rd.end_time) > 0,
-				TIMESTAMPDIFF(minute, rd.start_time ,rd.end_time),
-				TIMESTAMPDIFF(minute, rd.start_time ,rd.end_time)+1440)/1440 ) +
-			sum((rd.resultcode-100) * IF(TIMESTAMPDIFF(minute, rd.start_time ,rd.end_time) > 0,
-				TIMESTAMPDIFF(minute, rd.start_time ,rd.end_time),
-				TIMESTAMPDIFF(minute, rd.start_time ,rd.end_time)+1440)/1440 )        
-		        AS score
+			ROUND(
+				sum((rd.immercode-1000) * IF(TIMESTAMPDIFF(minute, rd.start_time ,rd.end_time) > 0,
+					TIMESTAMPDIFF(minute, rd.start_time ,rd.end_time),
+					TIMESTAMPDIFF(minute, rd.start_time ,rd.end_time)+1440)/1440 ) +
+				sum((rd.resultcode-100) * IF(TIMESTAMPDIFF(minute, rd.start_time ,rd.end_time) > 0,
+					TIMESTAMPDIFF(minute, rd.start_time ,rd.end_time),
+					TIMESTAMPDIFF(minute, rd.start_time ,rd.end_time)+1440)/1440 ) )        
+	        AS score
 		FROM report r
 			INNER JOIN reportdetail rd ON r.id = rd.report_id 
 		WHERE uid = #{uid}
-		ORDER BY r.day DESC
+		GROUP BY r.id
+		ORDER BY r.day
 	</select>
 
 </mapper>
